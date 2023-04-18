@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TitleStrategy } from '@angular/router';
+import { DeliveryOrder } from '../models';
 
 @Component({
   selector: 'app-delivery',
@@ -22,8 +23,9 @@ export class DeliveryComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   processDelivery() {
-    const delivery = this.form.value
+    const delivery = this.form.value as DeliveryOrder
     console.info('>>>> delivery: ', delivery)
+    this.form.reset
   }
 
   private createForm(): FormGroup {
@@ -31,6 +33,9 @@ export class DeliveryComponent implements OnInit {
       name: this.fb.control<string>(''),
       address: this.fb.control<string>(''),
       email: this.fb.control<string>(''),
+      session: this.fb.control<string>(''),
+      insurance: this.fb.control<boolean>(false),
+      priority: this.fb.control<boolean>(false),
       deliveryDate: this.fb.control<string>(''),
       comments: this.fb.control<string>('')
       
